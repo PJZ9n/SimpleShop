@@ -1,4 +1,4 @@
-name: Template
+name: SimpleShop
 version: 1.0.0
-main: pjz9n\template\Main
+main: pjz9n\simpleshop\Main
 api: 3.0.0
