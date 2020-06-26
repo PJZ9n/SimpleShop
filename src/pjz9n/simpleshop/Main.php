@@ -45,8 +45,10 @@ class Main extends PluginBase
         $localePath = $this->getFile() . "resources/locale/";
         $this->lang = new BaseLang($lang, $localePath, "eng");
         $this->getLogger()->info($this->lang->translateString("language.selected", [$this->lang->getName()]));
-        $money = MoneyConnectorUtils::getConnectorByName((string)$this->getConfig()->get("money-api"));
+        $api = (string)$this->getConfig()->get("money-api");
+        $money = MoneyConnectorUtils::getConnectorByName($api);
         if (!($money instanceof MoneyConnector)) throw new RuntimeException("Unknown money-api type.");
         $this->money = $money;
+        $this->getLogger()->info($this->lang->translateString("moneyapi.selected", [$api]));
     }
 }
