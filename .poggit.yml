@@ -4,5 +4,8 @@ branches:
   - master
 projects:
   SimpleShop:
-    path: ""
+    path:
+      libs:
+        - src: dktapps-pm-pl/pmforms/pmforms
+          version: 1.0.0
 ...
