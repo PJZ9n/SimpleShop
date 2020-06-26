@@ -23,13 +23,19 @@ declare(strict_types=1);
 
 namespace pjz9n\simpleshop;
 
+use PJZ9n\MoneyConnector\MoneyConnector;
+use PJZ9n\MoneyConnector\MoneyConnectorUtils;
 use pocketmine\lang\BaseLang;
 use pocketmine\plugin\PluginBase;
+use RuntimeException;
 
 class Main extends PluginBase
 {
     /** @var BaseLang */
     private $lang;
+
+    /** @var MoneyConnector */
+    private $money;
 
     public function onEnable(): void
     {
@@ -39,5 +45,8 @@ class Main extends PluginBase
         $localePath = $this->getFile() . "resources/locale/";
         $this->lang = new BaseLang($lang, $localePath, "eng");
         $this->getLogger()->info($this->lang->translateString("language.selected", [$this->lang->getName()]));
+        $money = MoneyConnectorUtils::getConnectorByName((string)$this->getConfig()->get("money-api"));
+        if (!($money instanceof MoneyConnector)) throw new RuntimeException("Unknown money-api type.");
+        $this->money = $money;
     }
 }

@@ -1,2 +1,4 @@
 # Language
 lang: def
+# Money API
+money-api: EconomyAPI
